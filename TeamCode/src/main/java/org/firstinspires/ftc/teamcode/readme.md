@@ -14,10 +14,11 @@ for, and on which Balancing Stone you begin. There are 4 cases:
 * Red Left: Red Alliance, robot on left Balancing Stone.
 * Red Right: Red Alliance, robot on right Balancing Stone.
 
-All these Autonomous modes operate by dead reckoning, or "open loop". That means the robot runs its path blindly,
-with no attempt to check its position or orientation, with no feedback to correct for errors.
-Obviously, this means the robot must be carefully calibrated before running any of these.
-See last year's code for vision-assisted Autonomous navigation; that code closes the loop.
+All these Autonomous modes operate by dead reckoning, or "open loop". That means the robot runs
+its path blindly, with no attempt to check its position or orientation, with no feedback to
+correct for errors. Obviously, this means the robot must be carefully calibrated before running
+any of these. See last year's code for vision-assisted Autonomous navigation; that code closes the
+loop.
 
 ### TeleOp modes
 Run one of the TeleOp modes during the Driver controlled phase of a match.
@@ -140,3 +141,9 @@ intentional.
 5)  Add: include ':Team0417' to the "/settings.gradle" file.
 6)  Open up Android Studios and clean out any old files by using the menu to 
 "Build/Clean Project".
+
+= = = = = = = =
+To do
+
+o Get FTC SDK to version 3.6.
+o Upgrade Vuforia to version 7.
