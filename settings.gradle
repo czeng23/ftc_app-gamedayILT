@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 include ':FtcRobotController', ':caffe-wrapper'
 include ':TeamCode'
 include ':opencv-java'
 include ':ftc-visionlib'
 include ':ftc-cameratest'
 include ':ftc-cnn-test'
+=======
+include ':FtcRobotController'
+include ':TeamCode'
+>>>>>>> upstream/master
