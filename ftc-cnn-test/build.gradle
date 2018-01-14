@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+
+    defaultConfig {
+        applicationId "io.github.codecube.cnntest"
+        minSdkVersion 19 // was 16
+        targetSdkVersion 19 // was 16
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile project(':opencv-java')
+    compile project(':ftc-visionlib')
+    compile project(path: ':caffe-wrapper')
+}

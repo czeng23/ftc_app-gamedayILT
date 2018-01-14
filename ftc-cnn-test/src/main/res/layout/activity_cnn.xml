@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/model_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/toggle_classification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toggleClassification"
+            android:text="Toggle Classification" />
+
+        <Spinner
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/labels" />
+
+        <Button
+            android:id="@+id/capture_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="captureImages"
+            android:text="Capture 100 Images" />
+
+    </LinearLayout>
+
+    <org.opencv.android.JavaCameraView
+        android:id="@+id/surfaceView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>
