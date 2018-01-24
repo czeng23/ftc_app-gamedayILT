@@ -63,10 +63,6 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/master
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
 

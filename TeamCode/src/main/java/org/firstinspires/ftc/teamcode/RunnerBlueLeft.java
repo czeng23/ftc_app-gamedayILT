@@ -36,15 +36,20 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
  * JMR v 1.0 1/11/18: Production code for Meet 3. Does knock and run to the Safety Zone. Open CV
  * color limits adjusted to reject brown in the Pictographs. Cleanup code added to
  * Runnerbot:ecoderDrive, to get better transition from one segment to the next.
+ * GeorgeFlores v 1.2 1/25/18. Adds robot positioning and Glyph pusher action for InterLeague.
+
  */
 
 @Autonomous(name = "Runner Blue Left", group = "Game Day 3") // TESTED, works
   //@Disabled
   public class RunnerBlueLeft extends LinearVisionOpMode {
   private static final double D2SAFETY = 36.0; // inches for left or right Balancing Stone
+  private static final double COLUMNSPACING = 7.75; // inches for space between columns
+  private double drive2safety = D2SAFETY;
   private static final double JEWEL_KNOCK_ANGLE = 0.30; // radians
   private static final double JEWEL_KNOCK_DISTANCE = 2.75; // inches;
 	private double turn2Safety = -Math.PI/2; // 90 degrees CW
+	private double turn2CryptoBox = Math.PI/2; // 90 degrees CCW
   private Runnerbot robot = new Runnerbot(this);
 
   // Jewel color decision. OpenCV handles this.
@@ -67,7 +72,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 		// Operations:
 		// Using OpenCV capability, look at Jewels, decide whether the one to be knocked off is
 		// on the left or right. This should also work for RunnerBlueRight.
-		targetJewel = robot.decideTargetJewel("Blue"); // TESTED, works.
+		targetJewel = robot.decideTargetJewel("Blue"); // TESTED at Meet 3, works.
     report = String.format("Jewel decision %.2f", robot.runtime.seconds());
 	  report += "s. knocking " + targetJewel;
 	  telemetry.addData("Decision", report);
@@ -75,46 +80,56 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 	  robot.runtime.reset();
 
 	  robot.paddle.setPosition(Runnerbot.PADDLE_DEPLOYED_POSITION);
-		sleep (1000);	// Let paddle drop, before doing the chosen turn. TESTED, works.
+		sleep (1000);	// Let paddle drop, before doing the chosen turn. TESTED at Meet 3, works.
 
 	  if (targetJewel.equals("left")) {
 		  // Turn counterclockwise, enough to knock Red Jewel off.
 		  // Angle to turn is JEWEL_KNOCK. Positive angle goes left.
 			robot.turnAngle (Runnerbot.DRIVE_TURN_SPEED, JEWEL_KNOCK_ANGLE);
-			// TESTED: works.
+			// TESTED at Meet 3: works.
 			turn2Safety -= JEWEL_KNOCK_ANGLE;
 			//robot.turnAngle (Runnerbot.DRIVE_TURN_SPEED, -JEWEL_KNOCK_ANGLE);
 	  } else if (targetJewel.equals("right")) {
 		  //Turn clockwise, enough to knock Red Jewel off
 			robot.turnAngle (Runnerbot.DRIVE_TURN_SPEED, -JEWEL_KNOCK_ANGLE);
-			// TESTED: works.
+			// TESTED at Meet 3: works.
 			turn2Safety += JEWEL_KNOCK_ANGLE;
 	  }
 
 		// Using Vuforia, look at the Pictograph to the left of the Jewels. Decide which
 		// Cryptobox column is the one coded into that Pictograph.
-	  /*targetColumn = robot.detectTargetColumn();
+	  targetColumn = robot.detectTargetColumn();
 	  report = String.format(". Column decision %.2f", robot.runtime.seconds());
 	  report += "s. Column " + targetColumn;
 	  telemetry.addData("Decision", report);
 	  telemetry.update();
 	  robot.runtime.reset();
-	  */
 
 	  // Pull paddle back so it won't hit our own Jewel. Allow time for that before the next turn.
 		robot.paddle.setPosition(Runnerbot.PADDLE_RETRACTED_POSITION);
-		sleep(1000);
+		sleep(1000); // TESTED at meet 3
 		// Turn right toward Cryptobox and Safety Zone.
-		robot.turnAngle(Runnerbot.DRIVE_TURN_SPEED, turn2Safety);
+		robot.turnAngle(Runnerbot.DRIVE_TURN_SPEED, turn2Safety); // TESTED at meet 3
 
-	  // Drive to Safety Zone. It will be directly to the right, distance
-	  // D2SAFETY. Since the Runnerbot turns on its axis to knock the
+	  // Drive to Safety Zone. It will be directly to the right, distance D2SAFETY, probably
+		// modified by column decision. Since the Runnerbot turns on its axis to knock the
 	  // Jewel, it does not move toward or away from the Safety Zone.
-		robot.driveStraight(Runnerbot.DRIVE_STRAIGHT_SPEED, D2SAFETY);
-		// To do: adjust distance to drive according to the detected Pictograph.
-	  //robot.driveStraight (Runnerbot.DRIVE_STRAIGHT_SPEED, D2SAFETY); // NOT
-	  // TESTED.
-	  // To do: code the turn toward the Cryptobox, and Glyph placement.
+		robot.driveStraight(Runnerbot.DRIVE_STRAIGHT_SPEED, D2SAFETY); // TESTED at Meet 3.
+
+		// Use the targetColumn to code adjusted distance to drive.
+		if (targetColumn == "LEFT"){
+			drive2safety = drive2safety- COLUMNSPACING;
+		}
+		else if (targetColumn == "RIGHT"){
+			drive2safety = drive2safety +COLUMNSPACING;
+		}
+
+		// Do the turn to the Cryptobox.
+		robot.turnAngle (Runnerbot.DRIVE_TURN_SPEED, turn2CryptoBox);
+
+		// Push the Glyph.
+
+
   }
 }
 

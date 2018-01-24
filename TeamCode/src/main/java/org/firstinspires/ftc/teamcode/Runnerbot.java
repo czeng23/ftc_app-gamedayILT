@@ -45,6 +45,7 @@ import static org.lasarobotics.vision.opmode.VisionOpMode.beacon;
  * JMR v 0.3 12/31/17: extends GenericRobot class.
  * JMR v 1.0 1/2/18. Production quality. Uses improved GenericRobot class.
  * JMR v 1.1 1/7/18. Fixes v 1.0 bug, by which RunnerBlueLeft could not initialize motors.
+ * <kids> v 1.2 1/25/18. Adds Glyph pusher support for InterLeague.
  */
 
 public class Runnerbot extends GenericRobot {
@@ -76,6 +77,11 @@ public class Runnerbot extends GenericRobot {
 
 
     /*  Minimal Robot arm, no more than a Jewel knocking paddle.  */
+    public Servo paddle = null; // Servo Port 5 on REV arm hub.
+    public static final double PADDLE_RETRACTED_POSITION = 1.0;
+    public static final double PADDLE_DEPLOYED_POSITION = 0.0;
+
+    /*  Minimal Robot arm, no more than a Glyph Pusher.  */
     public Servo paddle = null; // Servo Port 5 on REV arm hub.
     public static final double PADDLE_RETRACTED_POSITION = 1.0;
     public static final double PADDLE_DEPLOYED_POSITION = 0.0;
@@ -340,5 +346,11 @@ public class Runnerbot extends GenericRobot {
         paddle = hwMap.servo.get("Paddle"); // Port 5 of Arm hub
         paddle.setPosition(PADDLE_RETRACTED_POSITION);
         // This may be omitted if the paddle is manually retracted.
+    }
+
+    public void initPusher() {
+        pusher = hwMap.servo.get("Pusher"); // Port 5 of Arm hub
+        pusher.setPosition(PUSHER_RETRACTED_POSITION);
+        // This may be omitted if the pusher is manually retracted
     }
 }
