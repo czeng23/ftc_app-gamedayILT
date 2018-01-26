@@ -77,14 +77,14 @@ public class Runnerbot extends GenericRobot {
 
 
     /*  Minimal Robot arm, no more than a Jewel knocking paddle.  */
-    public Servo paddle = null; // Servo Port 5 on REV arm hub.
+    public Servo paddle = null; // Servo Port 5 on REV hub.
     public static final double PADDLE_RETRACTED_POSITION = 1.0;
     public static final double PADDLE_DEPLOYED_POSITION = 0.0;
 
     /*  Minimal Robot arm, no more than a Glyph Pusher.  */
-    public Servo paddle = null; // Servo Port 5 on REV arm hub.
-    public static final double PADDLE_RETRACTED_POSITION = 1.0;
-    public static final double PADDLE_DEPLOYED_POSITION = 0.0;
+    public Servo pusher = null; // Servo Port 4 on REV hub.
+    public static final double PUSHER_RETRACTED_POSITION = 1.0;
+    public static final double PUSHER_DEPLOYED_POSITION = 0.0;
 
     /*                  Robot vision: OpenCV                        */
     private LinearOpMode currentOpMode;
