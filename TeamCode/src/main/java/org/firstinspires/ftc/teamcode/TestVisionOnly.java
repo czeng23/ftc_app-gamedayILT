@@ -36,8 +36,6 @@ private VuforiaTrackable relicTemplate = null;
 
 @Override
 public void runOpMode() throws InterruptedException {
-	waitForStart();
-	robot.runtime.reset();
 
 	// Using Vuforia, look at the Pictograph to the left of the Jewels. Decide which
 	// Cryptobox column is the one coded into that Pictograph.
@@ -65,7 +63,7 @@ public void runOpMode() throws InterruptedException {
 	parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 	vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
-	/**
+	/*
 	 * Load the data set containing the VuMarks for Relic Recovery. There's only one trackable
 	 * in this data set: all three of the VuMarks in the game were created from this one
 	 * template, but differ in their instance id information.
@@ -74,44 +72,52 @@ public void runOpMode() throws InterruptedException {
 	VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
 	VuforiaTrackable relicTemplate = relicTrackables.get(0);
 	relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
-
+	relicTrackables.activate();
+	int tries = 0;
 	telemetry.addData(">", "Press Play to start.");
 	telemetry.update();
 	waitForStart();
+	robot.runtime.reset();
 
-	relicTrackables.activate();
-
+	/*
 	while (opModeIsActive()) {
-
-		/**
-		 * See if any of the instances of {@link relicTemplate} are currently visible.
-		 * {@link RelicRecoveryVuMark} is an enum which can have the following values:
-		 * UNKNOWN, LEFT, CENTER, and RIGHT. When a VuMark is visible, something other than
-		 * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
-		 */
 		RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-
 		if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-
-                /* Found an instance of the template. In the actual game, you will probably
-                 * loop until this condition occurs, then move on to act accordingly depending
-                 * on which VuMark was visible. */
 			telemetry.addData("VuMark", "%s visible", vuMark);
 		}
 		else {
 			telemetry.addData("VuMark", "not visible");
 		}
-
 		telemetry.update();
 	}
+*/
+	// Ready for Vuforia to read the PictoGraph.
+	telemetry.addData(">", "Vuforia ready.");
+	telemetry.update();
+	RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+	do {
+		/*
+		 * See if any of the instances of {@link relicTemplate} are currently visible.
+		 * {@link RelicRecoveryVuMark} is an enum which can have the following values:
+		 * UNKNOWN, LEFT, CENTER, and RIGHT. When a VuMark is visible, something other than
+		 * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
+		 */
+		tries++;
+	} while ((vuMark == RelicRecoveryVuMark.UNKNOWN) && (tries < VUFORIA_GIVEUP)) ;
+	// Found an instance of the template, or took too many tries.
+	targetColumn = vuMark.toString();
+	telemetry.addData("Column", targetColumn);
+	telemetry.update();
 
 	// Using OpenCV capability, look at Jewels, decide whether the one to be knocked off is
 	// on the left or right.
+
 	enableExtension(Extensions.BEACON);
 	targetJewel = robot.decideTargetJewel("Blue"); // TESTED in gameday 3,
 	report += String.format("Jewel decision %.2f", robot.runtime.seconds());
 	report += "s. knocking " + targetJewel;
-	telemetry.addData("Decision", report);
+	telemetry.addData("Decision", report + ". ");
+	telemetry.addData("Target column", targetColumn);
 	robot.runtime.reset();
 
 	//super.stop();
