@@ -65,7 +65,7 @@ public void runOpMode() throws InterruptedException {
 
 	/*
 	 * Load the data set containing the VuMarks for Relic Recovery. There's only one trackable
-	 * in this data set: all three of the VuMarks in the game were created from this one
+	 * in this data set: all three of the VuMarks in the game were created from this one.
 	 * template, but differ in their instance id information.
 	 * @see VuMarkInstanceId
 	 */
@@ -79,18 +79,6 @@ public void runOpMode() throws InterruptedException {
 	waitForStart();
 	robot.runtime.reset();
 
-	/*
-	while (opModeIsActive()) {
-		RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-		if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-			telemetry.addData("VuMark", "%s visible", vuMark);
-		}
-		else {
-			telemetry.addData("VuMark", "not visible");
-		}
-		telemetry.update();
-	}
-*/
 	// Ready for Vuforia to read the PictoGraph.
 	telemetry.addData(">", "Vuforia ready.");
 	telemetry.update();
