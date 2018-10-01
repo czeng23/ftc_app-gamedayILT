@@ -93,6 +93,9 @@ For technical questions regarding the SDK, please visit the FTC Technology forum
 # Release Information
 **************************************************************************************
 
+Version 4.0 (built on 18.09.30)
+Merged with FtcRobotController 4.0
+
 Version 3.6 (built on 17.12.18)
 
 Changes include:
