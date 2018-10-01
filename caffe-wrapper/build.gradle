@@ -18,6 +18,8 @@ android {
 }
 
 repositories {
+    google() // here
+    jcenter()
     flatDir {
         dirs '../libs' // was straight ol' libs, but that's not in this folder.
     }

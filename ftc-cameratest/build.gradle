@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
 
     defaultConfig {
         applicationId "org.lasarobotics.tests.camera"
@@ -18,12 +18,14 @@ android {
 }
 
 repositories {
+    google() // here
+    jcenter()
     flatDir {
         dirs 'libs'
     }
 }
 
 dependencies {
-    compile project(':opencv-java')
-    compile project(':ftc-visionlib')
+    implementation project(':ftc-visionlib')
+    debugImplementation project(':opencv-java')
 }

@@ -16,7 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
+    repositories {
+        google() // here
+        jcenter()
+        flatDir {
+            dirs '../libs'
+        }
+    }
     lintOptions {
         abortOnError false
     }

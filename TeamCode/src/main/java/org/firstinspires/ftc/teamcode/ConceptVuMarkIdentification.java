@@ -106,12 +106,12 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
          * and paste it in to your code onthe next line, between the double quotes.
          */
         parameters.vuforiaLicenseKey =
-          "ASkv3nr/////AAAAGYZ9CexhH0K0lDbV090F719DkwXCIXEUmExgnQNDFGjrDrk" +
-            "VJnU7xNhuKHLsC32Pb1jmr+6vp6JtpVKvNmTf28ZYkUphDeajNPCLgGVxLjD6xs" +
-            "fgBayqSO9bfQFeGkrdEgXlP+2oaz234afhWti9Jn8k71mzbQ4W2koX9yBMWz0YL" +
-            "zUWClcasxi6Nty7SUvV+gaq3CzpKVtjKk+2EwV6ibIc0V47LAeB0lDGsGkSzuJ+" +
-            "93/Ulpoj+Lwr/jbI2mu/Bs2W7U9mw73CMxvDix9o1FxyPNablla4W5C5lUDm0j2" +
-            "lW5gsUNOhgvlWKQ+eCu9IBp53WbW5nfNzhXPaDDh/IlBbZuAMIJuMDEHI5PVLKT9L";
+            "Acp7ia7/////AAABmRUc29lU9ERDm/qTT1VrXcVPUFFTS5YWFycUcIIBdKCvSzw8" +
+            "IEXH+sCO9omkkfSF7BGrCMhcQMLsJmvtkFRrWhTEZHApa9PFTSkNfFukTutNnfoj" +
+            "Wzl2MPN/h1tRF3Rag1BvyxGwpfkHdILvQOm82exxcLagXmRgHI9Eik7WlInbJETe" +
+            "ZVP+y5jqlZ5uGL4XWlSSDk+D70VL0cBFlwhByAbEcEwYVpRT9FXfc0+lGWvb7Rb4" +
+            "T0efGhwseYPOz4/3xfj6ZPMUGayeMkHOD+fEBfUwtUhvaiF8sYC5mhG2yMis+iDq" +
+            "geSUUsVZFtWVoJJ51arJ9K79vTR0ixNpSskaIrIOPvqzZqmQRIbjzlZsfWXs";
         /*
          * We also indicate which camera on the RC that we wish to use.
          * Here we chose the back (HiRes) camera (for greater range), but
